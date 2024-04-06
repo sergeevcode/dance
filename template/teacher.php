@@ -15,7 +15,8 @@
         
     </div> 
     <div class="col-xl-8">
-        О хореографе
+        
+    <?=$data['user']['descr']?>
     </div> 
 </div>
 
@@ -32,7 +33,7 @@
             <div class="col-sm-6 col-lg-6">
                 <div class="card card-sm">
                     <a href="<?=$item['src']?>" class="d-block">
-                        <img src="<?=$item['src']?>" class="card-img-top">
+                        <img src="<?=$item['src']?>" class="card-img-top dance-img">
                     </a>
                     <div class="card-body">
                         <div class="d-flex align-items-center"> 
@@ -89,7 +90,16 @@
                         </div>
                         </div>
                         <div class="col-md-auto">
-                            <a href="#" class="btn btn-primary">Записаться</a>
+                            <?php if (!in_array($service['id'], $data['orders'])):?>
+                            <form action="" method="post">
+                                <input type="hidden" name="user_id" value="<?=$_SESSION['user_id']?>">
+                                <input type="hidden" name="service_id" value="<?=$service['id']?>">
+                                <button class="btn btn-primary">Записаться</button>
+
+                            </form>
+                            <?php else:?>
+                                Вы записаны
+                            <?php endif;?>
                         </div>
                     </div>
                     </div>

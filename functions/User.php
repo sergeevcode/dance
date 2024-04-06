@@ -32,6 +32,48 @@ class User {
         return $users;
     }
 
+    public function updateUser($array, $file) {
+        if ($file) {
+            $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '/uploads';
+            $tmp_name = $files["file"]["tmp_name"];  
+            move_uploaded_file($tmp_name, "$uploads_dir/users/".$_SESSION['user_id'].".jpeg");
+        }
+       
+
+        $sql = "UPDATE `users` SET `name`='{$array['name']}', `descr`='{$array['descr']}' WHERE `id`='{$_SESSION['user_id']}'";
+        $this->db->query($sql);
+    }
+
+    public function setUserOrder($service_id, $user_id) {
+        $q = "INSERT INTO `userorders`(`user_id`, `service_id`) VALUES ('{$user_id}', '{$service_id}')";
+        $this->db->query($q);
+    }
+
+    public function getUserOrders($user_id) {
+        $q = "SELECT * FROM `userorders` WHERE `user_id`='{$user_id}'";
+        $sql = $this->db->query($q);
+        $return = [];
+        while ($row = $sql->fetch_assoc()) {
+            $return[] = $row['service_id'];
+        }
+        return $return;
+    }
+
+    public function getTeacherOrders() {
+        $services = $this->getUserServices($_SESSION['user_id']);
+        $results = [];
+        foreach($services as $service) {
+            $q = "SELECT * FROM `userorders` WHERE `service_id`='".$service['id']."'";
+            $sql = $this->db->query($q);
+            
+            while ($row = $sql->fetch_assoc()) {
+                $results[] = $row;
+            }
+        }
+        return $results;
+    }
+
+
     public function getUserInfo() {
         if (isset($_SESSION['user_id'])) {
             $q = "SELECT * FROM `users` WHERE `id`='".$_SESSION['user_id']."'";

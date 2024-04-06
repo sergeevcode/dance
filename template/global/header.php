@@ -9,6 +9,7 @@
     <link href="/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
     <link href="/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
     <link href="/dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/dist/css/demo.min.css?1684106062" rel="stylesheet"/>
     <style>
       @import url('https://rsms.me/inter/inter.css');
@@ -18,8 +19,21 @@
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
+.dance-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover
+}
+.swiper-wrapper {
+    column-count: 3;
+}
 
-  
+.swiper-slide {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 15px;
+}
 
     </style>
   </head>
@@ -34,7 +48,7 @@
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="/">
-              Dance
+            Dance with me ♥️
             </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
@@ -54,20 +68,52 @@
             <?php endif;?>
             
             <?php if (getAuth()):?>
-            <div class="nav-item dropdown">
-              <a href="/profile/" class="nav-link d-flex lh-1 text-reset p-0"> 
+                  <?php 
+
+
+                  $user = new User();
+                  $userInfo = $user->getUserInfo();
+                  ?>
+                  <?php if ($userInfo['role'] == 2): ?>
+                    <div class="nav-item dropdown">
+                      <a href="/orders/" class="nav-link d-flex lh-1 text-reset p-0"> 
+                        <div class="d-none d-xl-block ps-2">
+                          <div>
+                          Записи на занятия
+
+                          </div> 
+                        </div>
+                      </a> 
+                    </div>
+                    <?php endif;?>
+
+              <div class="nav-item dropdown mr-2">
+              <a href="/edit/" class="nav-link d-flex lh-1 text-reset p-0"> 
                 <div class="d-none d-xl-block ps-2">
                   <div>
-                  <?php 
-                      $user = new User();
-                      $userInfo = $user->getUserInfo();
-                      echo $userInfo['name'];
-                  ?>
+                  Редактировать профиль
 
                   </div> 
                 </div>
               </a> 
             </div>
+
+
+            <div class="nav-item d-none d-md-flex me-3" style="margin-left: 15px">
+              <div class="btn-list">
+                <a href="/profile/" class="btn"  rel="noreferrer">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+                    <?php 
+                      echo $userInfo['name'];
+                    ?>
+                </a> 
+                <a href="/logout/" class="btn" rel="noreferrer">
+                   Выход
+                </a> 
+              </div>
+            </div>
+
+ 
             <?php endif;?>
           </div>
         </div>
