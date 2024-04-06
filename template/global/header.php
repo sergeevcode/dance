@@ -74,6 +74,16 @@
                   $user = new User();
                   $userInfo = $user->getUserInfo();
                   ?>
+                  <div class="nav-item dropdown">
+                      <a href="/chat/" class="nav-link d-flex lh-1 text-reset p-0"> 
+                        <div class="d-none d-xl-block ps-2">
+                          <div>
+                          Чаты
+
+                          </div> 
+                        </div>
+                      </a> 
+                    </div>
                   <?php if ($userInfo['role'] == 2): ?>
                     <div class="nav-item dropdown">
                       <a href="/orders/" class="nav-link d-flex lh-1 text-reset p-0"> 

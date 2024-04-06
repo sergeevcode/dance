@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <div class="mb-3">
-                    <span class="avatar avatar-xl rounded" style="background-image: url(/static/avatars/010m.jpg)"></span>
+                    <span class="avatar avatar-xl rounded" style="background-image: url(/uploads/users/<?=$data['user']['id']?>.jpeg)"></span>
                 </div>
                 <div class="card-title mb-1"><?=$data['user']['name']?></div>
                 <div class="text-secondary">      

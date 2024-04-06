@@ -14,6 +14,11 @@ $user = new User();
 include_once __DIR__ . '/Pager.php';
 $pager = new Pager();
 
+
+include_once __DIR__ . '/Chat.php';
+$chat = new Chat();
+
+
 function getAuth() {
     if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id']))
         return $_SESSION['user_id'];
